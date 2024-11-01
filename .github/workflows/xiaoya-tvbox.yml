@@ -1,4 +1,4 @@
-name: xiaoya-tvbox ARM64 Pull and Save Docker Image
+name: My ARM64（xiaoya-tvbox）
 
 on:
   workflow_dispatch:
