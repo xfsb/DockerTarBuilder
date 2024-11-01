@@ -1,5 +1,13 @@
 name: xiaoya-tvbox ARM64 Pull and Save Docker Image
 
+on:
+  workflow_dispatch:
+    inputs:
+      docker_images:
+        description: '请填写docker镜像名称 多个用英文逗号分开'
+        required: true
+        default: 'haroldli/xiaoya-tvbox'  # 设置默认的 Docker 镜像列表
+
 jobs:
   pull_and_package:
     runs-on: ubuntu-latest
@@ -10,7 +18,7 @@ jobs:
 
     - name: Pull Docker Images and Package
       run: |
-        images="haroldli/xiaoya-tvbox"
+        images="${{ github.event.inputs.docker_images }}"
         IFS=',' read -r -a image_array <<< "$images"
         for image in "${image_array[@]}"; do
           docker pull "${image}" --platform "linux/arm64"
